@@ -3,7 +3,7 @@ var gulp       = require('gulp');
 var jscs       = require('gulp-jscs');
 var jshint     = require('gulp-jshint');
 var rimraf     = require('rimraf');
-var sourcemaps = require('gulp-sourcemaps');
+// var sourcemaps = require('gulp-sourcemaps');
 
 /*
    clean
@@ -17,9 +17,9 @@ gulp.task('clean-lib-src', function (cb) {
 */
 gulp.task('babel-src', ['clean-lib-src'], function () {
   return gulp.src('src/**/*.js')
-    .pipe(sourcemaps.init())
+    // .pipe(sourcemaps.init())
     .pipe(babel())
-    .pipe(sourcemaps.write())
+    // .pipe(sourcemaps.write())
     .pipe(gulp.dest('lib'));
 });
 
