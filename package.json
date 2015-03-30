@@ -1,6 +1,6 @@
 {
   "name": "word-count",
-  "main": "./lib/src/word-count",
+  "main": "./lib/word-count",
   "version": "0.2.0",
   "description": "A simple word count from atom examples",
   "activationCommands": {
