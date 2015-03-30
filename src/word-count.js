@@ -1,23 +1,25 @@
-var CompositeDisposable, WordCount, WordCountView;
+/* global atom */
 
-WordCountView = require('./word-count-view');
-CompositeDisposable = require('atom').CompositeDisposable;
+var WordCountView = require('./word-count-view');
+var CompositeDisposable = require('atom').CompositeDisposable;
 
-module.exports = WordCount = {
+var WordCount = {
 
   wordCountView: null,
-
   modalPanel: null,
-
   subscriptions: null,
 
   activate: function(state) {
+
     this.wordCountView = new WordCountView(state.wordCountViewState);
+
     this.modalPanel = atom.workspace.addModalPanel({
       item: this.wordCountView.getElement(),
       visible: false
     });
-    this.subscriptions = new CompositeDisposable;
+
+    this.subscriptions = new CompositeDisposable();
+
     return this.subscriptions.add(atom.commands.add('atom-workspace', {
       'word-count:toggle': (function(_this) {
         return function() {
@@ -30,7 +32,7 @@ module.exports = WordCount = {
   deactivate: function() {
     this.modalPanel.destroy();
     this.subscriptions.dispose();
-    return this.wordCountView.destroy();
+    this.wordCountView.destroy();
   },
 
   serialize: function() {
@@ -49,18 +51,18 @@ module.exports = WordCount = {
 
   hide: function() {
     this.disposableItem && this.disposableItem.dispose();
-    return this.modalPanel.hide();
+    this.modalPanel.hide();
   },
 
   calculate: function() {
     var words;
     words = this.getCurrentText().split(/\s+/).length;
-    return this.wordCountView.setCount(words);
+    this.wordCountView.setCount(words);
   },
 
   show: function() {
+    // get editor
     var editor = atom.workspace.getActiveTextEditor();
-
     if (!editor) {
       return;
     }
@@ -69,7 +71,7 @@ module.exports = WordCount = {
     this.modalPanel.show();
     if (this.disposableItem === void 0 ||
         this.disposableItem.disposed) {
-      return this.disposableItem = editor.onDidChangeSelectionRange((function(_this) {
+      this.disposableItem = editor.onDidChangeSelectionRange((function(_this) {
         return function() {
           return _this.calculate();
         };
@@ -78,9 +80,10 @@ module.exports = WordCount = {
   },
 
   getCurrentText: function() {
-    var editor, selection, text;
-    editor = atom.workspace.getActiveTextEditor();
+    var selection, text;
 
+    // get editor
+    var editor = atom.workspace.getActiveTextEditor();
     if (!editor) {
       return '';
     }
@@ -90,3 +93,5 @@ module.exports = WordCount = {
     return selection || text;
   }
 };
+
+module.exports = WordCount;

@@ -1,6 +1,6 @@
 {
   "name": "word-count",
-    "main": "./lib/word-count",
+  "main": "./lib/src/word-count",
   "version": "0.2.0",
   "description": "A simple word count from atom examples",
   "activationCommands": {
@@ -12,5 +12,21 @@
     "atom": ">=0.174.0 <2.0.0"
   },
   "dependencies": {
+    "babel": "^4.7.16",
+    "source-map-support": "^0.2.10"
+  },
+  "devDependencies": {
+    "chai": "^2.1.2",
+    "chai-as-promised": "^4.3.0",
+    "chai-things": "^0.2.0",
+    "gulp": "^3.8.11",
+    "gulp-babel": "^4.0.0",
+    "gulp-jscs": "^1.4.0",
+    "gulp-jshint": "^1.9.4",
+    "gulp-mocha": "^2.0.0",
+    "gulp-sourcemaps": "^1.5.1",
+    "jshint-stylish": "^1.0.1",
+    "rimraf": "^2.3.2",
+    "yargs": "^3.6.0"
   }
 }
